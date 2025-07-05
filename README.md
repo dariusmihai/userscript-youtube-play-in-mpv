@@ -74,7 +74,8 @@ In mpv, you have the option to go to the next/previous chapters, just like you d
 ## Downsides
 1. The browser can't know when mpv actually opens or closes, so once you click a button the script deactivates all buttons for the next 10 seconds to prevent accidentally clicking it multiple times.
 2. It's more cumbersome to write a comment or like a video because now you have to go back to the browser window and do these actions.
-3. Auto-play next video is not implemented. To be determined if it's even possible.
+3. Auto-play next video is not implemented. To be determined if it's even possible, at least for playlists.
+4. No ability to have closed captions / subtitles.
 
 ---
 ## Why does this exist?
