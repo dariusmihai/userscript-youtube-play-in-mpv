@@ -134,7 +134,7 @@
     );
     console.log('availableQualities'. availableQualities);
 
-    const acceptedQualities = ['1440p', '1080p', '1080p60', '720p', '480p'];
+    const acceptedQualities = ['1440p60', '1440p', '1080p60', '1080p', '720p', '480p'];
 
 
     console.log('availableResolutions', availableQualities);
