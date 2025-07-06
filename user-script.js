@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         YouTube ▶ MPV Handler + Toast + Dynamic Buttons
-// @version      1.5
+// @name         YouTube ▶ MPV Handler v1.6
+// @version      1.6
 // @match        https://www.youtube.com/watch*
 // @grant        none
 // @namespace    Violentmonkey Scripts
@@ -127,25 +127,25 @@
 
     console.log('formats', formats);
 
-    const availableResolutions = new Set(
-      formats.map(f => f.height).filter(Boolean)
+    const availableQualities = new Set(
+    formats
+      .map(f => f.qualityLabel)
+      .filter((h) => typeof h === 'string' && h != '')
     );
+    console.log('availableQualities'. availableQualities);
 
-    const qualities = [
-      { label: '▶ MPV (max)', quality: '' },
-      { label: '▶ MPV (1440)', quality: '1440p' },
-      { label: '▶ MPV (1080)', quality: '1080p' },
-      { label: '▶ MPV (720)',  quality: '720p' }
-    ];
+    const acceptedQualities = ['1440p', '1080p', '1080p60', '720p', '480p'];
 
-    console.log('availableResolutions', availableResolutions);
-    for (const { label, quality } of qualities) {
+
+    console.log('availableResolutions', availableQualities);
+
+    for (const quality of acceptedQualities) {
       // Always show the "max" button or if quality is available
-      if (!quality || availableResolutions.has(parseInt(quality))) {
+      if (!quality || availableQualities.has(quality)) {
         const btn = document.createElement('button');
         btn.className = 'mpv-handler-btn';
         btn.style = btnStyle;
-        btn.textContent = label;
+        btn.textContent = '▶ ' + quality;
         btn.onclick = () => handleClick(btn, quality);
         controls.insertBefore(btn, controls.firstChild);
       }
@@ -153,16 +153,28 @@
   }
 
 
-  const waitAndInsert = () => {
-    const interval = setInterval(() => {
-      const ready = document.querySelector('.ytp-left-controls');
-      if (ready) {
-        clearInterval(interval);
-        insertButtons();
-      }
-    }, 2000);
-  };
+  function observeAndInsertButtons() {
+    const observer = new MutationObserver(() => {
+      insertButtons();
+    });
 
-  waitAndInsert();
-  document.addEventListener('yt-navigate-finish', waitAndInsert);
+    const waitForControls = setInterval(() => {
+      const controls = document.querySelector('.ytp-left-controls');
+      if (controls) {
+        clearInterval(waitForControls);
+        insertButtons();
+        observer.observe(controls, { childList: true, subtree: false });
+      }
+    }, 500);
+  }
+
+  // Run on initial load
+  observeAndInsertButtons();
+
+  // Run again when navigating between videos
+  document.addEventListener('yt-navigate-finish', () => {
+    console.log('yt-navigate-finish');
+    observeAndInsertButtons();
+  });
+
 })();
