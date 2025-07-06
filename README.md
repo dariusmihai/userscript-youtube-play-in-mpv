@@ -70,11 +70,19 @@ Once you click on a button, you will see:
 In mpv, you have the option to go to the next/previous chapters, just like you do in the Youtube player.
 
 ---
+## Advantages of playing in mpv
+- Much less cpu usage, especially in browsers that don't properly support hardware decoding in linux
+- Playback is smoother, no dropped frames
+- Seeking is much faster, both forward and backward
+- Can easily skip through chapters
+- Clear indication of how much of the video is cached
+- Once the video is cached, you don't have to stay connected to the internet
+
 ## Downsides
-1. The browser can't know when mpv actually opens or closes, so once you click a button the script deactivates all buttons for the next 10 seconds to prevent accidentally clicking it multiple times.
-2. It's more cumbersome to write a comment or like a video because now you have to go back to the browser window and do these actions.
-3. Auto-play next video is not implemented. To be determined if it's even possible, at least for playlists.
-4. No ability to have closed captions / subtitles.
+- The browser can't know when mpv actually opens or closes, so once you click a button the script deactivates all buttons for the next 10 seconds to prevent accidentally clicking it multiple times.
+- It's more cumbersome to write a comment or like a video because now you have to go back to the browser window and do these actions.
+- Auto-play next video is not implemented. To be determined if it's even possible, at least for playlists.
+- No ability to have closed captions / subtitles.
 
 ---
 ## Why does this exist?
