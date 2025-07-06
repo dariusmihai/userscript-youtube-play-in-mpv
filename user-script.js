@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         YouTube ▶ MPV Handler + Toast
-// @version      1.4
+// @name         YouTube ▶ MPV Handler + Toast + Dynamic Buttons
+// @version      1.5
 // @match        https://www.youtube.com/watch*
 // @grant        none
 // @namespace    Violentmonkey Scripts
@@ -118,22 +118,40 @@
     const controls = document.querySelector('.ytp-left-controls');
     if (!controls || controls.querySelector('.mpv-handler-btn')) return;
 
+    let playerResponse = window.ytplayer?.config?.args?.raw_player_response;
+
+    const formats = [
+      ...(playerResponse?.streamingData?.formats || []),
+      ...(playerResponse?.streamingData?.adaptiveFormats || [])
+    ];
+
+    console.log('formats', formats);
+
+    const availableResolutions = new Set(
+      formats.map(f => f.height).filter(Boolean)
+    );
+
     const qualities = [
       { label: '▶ MPV (max)', quality: '' },
       { label: '▶ MPV (1440)', quality: '1440p' },
       { label: '▶ MPV (1080)', quality: '1080p' },
-      { label: '▶ MPV (720)', quality: '720p' },
+      { label: '▶ MPV (720)',  quality: '720p' }
     ];
 
+    console.log('availableResolutions', availableResolutions);
     for (const { label, quality } of qualities) {
-      const btn = document.createElement('button');
-      btn.className = 'mpv-handler-btn';
-      btn.style = btnStyle;
-      btn.textContent = label;
-      btn.onclick = () => handleClick(btn, quality);
-      controls.insertBefore(btn, controls.firstChild);
+      // Always show the "max" button or if quality is available
+      if (!quality || availableResolutions.has(parseInt(quality))) {
+        const btn = document.createElement('button');
+        btn.className = 'mpv-handler-btn';
+        btn.style = btnStyle;
+        btn.textContent = label;
+        btn.onclick = () => handleClick(btn, quality);
+        controls.insertBefore(btn, controls.firstChild);
+      }
     }
   }
+
 
   const waitAndInsert = () => {
     const interval = setInterval(() => {
@@ -142,7 +160,7 @@
         clearInterval(interval);
         insertButtons();
       }
-    }, 500);
+    }, 2000);
   };
 
   waitAndInsert();
