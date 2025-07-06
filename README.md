@@ -58,9 +58,8 @@ Open youtube and start playing a video.
 Whenever you want to open it in mpv, click one of the buttons that appear beneath the video. 
 You will have several buttons:
 - The first button is for the maximum possible quality.
-- The second one is for 1440p. If it doesn't work, then the video does not have 1440p available.
-- The third one is for 1080p. Same as before, if it doesn't work then the video does not haeve 1080p available.
-- The fourth one is for 720p
+- Other buttons are for 1440p, 1080p, 720p
+- The other buttons appear only for resolutions that are actually available on the current video
 
 Once you click on a button, you will see:
 - the video will stop playing on the page
