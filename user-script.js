@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         YouTube ▶ MPV Handler v1.6
-// @version      1.6
+// @name         YouTube ▶ MPV Handler v1.7
+// @version      1.7
 // @match        https://www.youtube.com/watch*
 // @grant        none
 // @namespace    Violentmonkey Scripts
@@ -134,13 +134,18 @@
     );
     console.log('availableQualities'. availableQualities);
 
-    const acceptedQualities = ['1440p60', '1440p', '1080p60', '1080p', '720p', '480p'];
+    const acceptedQualities = ['2160p', '2160p60', '1440p60', '1440p', '1080p60', '1080p', '720p', '480p'];
 
 
-    console.log('availableResolutions', availableQualities);
+    // Always show the "max" button
+    const btn = document.createElement('button');
+        btn.className = 'mpv-handler-btn';
+        btn.style = btnStyle;
+        btn.textContent = '▶ Max';
+        btn.onclick = () => handleClick(btn);
+        controls.insertBefore(btn, controls.firstChild);
 
     for (const quality of acceptedQualities) {
-      // Always show the "max" button or if quality is available
       if (!quality || availableQualities.has(quality)) {
         const btn = document.createElement('button');
         btn.className = 'mpv-handler-btn';
