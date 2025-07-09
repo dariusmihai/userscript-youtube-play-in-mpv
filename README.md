@@ -1,7 +1,7 @@
 
 ![yt-aurora-toast-nologo](https://github.com/user-attachments/assets/de3cf414-2858-4629-95a5-e723dd8deb3f)
 
-# userscript-youtube-play-in-mpv
+# Play YouTube videos in MPV
 Allows you to launch the current YouTube video in MPV directly from the video page with a single click.   
 Adds buttons to YouTube video pages that let you open the video in MPV at various resolutions (e.g., 1080p, 720p) for improved playback performance or external viewing.
 
