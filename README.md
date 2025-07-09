@@ -1,6 +1,5 @@
 
-![yt-aurora-toast](https://github.com/user-attachments/assets/e1284569-c6f5-40d3-bbd9-7bbce61616d4)
-
+![yt-aurora-toast-nologo](https://github.com/user-attachments/assets/de3cf414-2858-4629-95a5-e723dd8deb3f)
 
 # userscript-youtube-play-in-mpv
 Allows you to launch the current YouTube video in MPV directly from the video page with a single click.   
